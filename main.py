@@ -19,7 +19,7 @@ conector = mysql.connector.connect(
 cursor = conector.cursor()
 
 #Códigos do Streamlit
-st.title("Neverland")
+st.title("Iago e Duda")
 st.sidebar.title("Opções")
 financeiro = st.sidebar.selectbox("Financeiro", ["Selecionar...", "Dívidas", "Entradas"])
 dispensa = st.sidebar.selectbox("Dispensa", ["Selecionar..." ,"Compras", "organização"])
@@ -54,7 +54,7 @@ if dispensa == "Compras":
     comando_read = f'SELECT * FROM dblista'
     cursor.execute(comando_read)
     resultado = cursor.fetchall()
-    st.dataframe(resultado, width=500)
+    st.dataframe(resultado,width=700)
 
     st.header("Inserir Item na Lista")
     lcol1, lcol2 = st.columns(2)
