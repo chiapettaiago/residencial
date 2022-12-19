@@ -22,6 +22,7 @@ cursor = conector.cursor()
 st.title("Neverland")
 st.sidebar.title("Opções")
 financeiro = st.sidebar.selectbox("Financeiro", ["Selecionar...", "Dívidas", "Entradas"])
+dispensa = st.sidebar.selectbox("Dispensa", ["Selecionar..." ,"Compras", "organização"])
 if financeiro == "Dívidas":
     st.header("Relação de Dívidas")
     comando_read = f'SELECT * FROM dbdividas WHERE SIT = 0'
@@ -47,6 +48,27 @@ if financeiro == "Dívidas":
         comando_create = f'INSERT INTO dbdividas (NOME, VENC, VALOR, SIT) VALUES ("{nome_dividas}", "{venc_dividas}", {valor_dividas}, {situacao_divida}) '
         cursor.execute(comando_create)
         conector.commit()
+
+if dispensa == "Compras":
+    st.header("Lista de Compras")
+    comando_read = f'SELECT * FROM dblista'
+    cursor.execute(comando_read)
+    resultado = cursor.fetchall()
+    st.dataframe(resultado, width=500)
+
+    st.header("Inserir Item na Lista")
+    lcol1, lcol2 = st.columns(2)
+    with lcol1:
+        nome_item = st.text_input("Insira aqui a Identificação do Item")
+        quant_item = st.number_input("Quantidade do Item")
+    with lcol2:    
+        valor_item = st.number_input("Valor do Item")
+    if st.button("Inserir"):
+        comando_create = f'INSERT INTO dblista (ITEM, QUANT, PREC) VALUES ("{nome_item}", "{quant_item}", {valor_item}) '
+        cursor.execute(comando_create)
+        conector.commit()
+
+
 
 
 #CRUD
