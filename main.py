@@ -34,7 +34,7 @@ if financeiro == "Dívidas":
     comando_read_soma = f'SELECT SUM(VALOR) FROM dbdividas'
     cursor.execute(comando_read_soma)
     resultadosoma = cursor.fetchall()
-    st.table('Total: ', resultadosoma)
+    st.table("Total: ", resultadosoma)
 
     st.header("Inserir nova Dívida")
     col1, col2 = st.columns(2)
