@@ -67,6 +67,12 @@ if dispensa == "Compras":
         comando_create = f'INSERT INTO dblista (ITEM, QUANT, PREC) VALUES ("{nome_item}", "{quant_item}", {valor_item}) '
         cursor.execute(comando_create)
         conector.commit()
+    st.subheader("Deletar Nome do Produto")
+    deletar = st.text_input("Insira o nome do Item a ser deletado")
+    if st.button("Deletar"):
+        comando_delete = f'DELETE FROM dblista WHERE ITEM = "{deletar}"'
+        cursor.execute(comando_delete)
+        conector.commit()
 
 
 
